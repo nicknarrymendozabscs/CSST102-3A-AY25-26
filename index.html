@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSST102 Portfolio - Nick Narry S. Mendoza</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2a2a2a;
+            --accent: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #808080;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #171717;
+            --bg-card: #1e1e1e;
+            --border: #2a2a2a;
+            --hover: #333333;
+            --gradient: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .hero-text {
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .hero-text .highlight {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .hero-text .description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: var(--text-secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 0.875rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--hover);
+            border-color: var(--text-secondary);
+        }
+        
+        .hero-image {
+            animation: fadeInRight 1s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            background-image: url('https://scontent.fmnl25-4.fna.fbcdn.net/v/t39.30808-6/480624794_950708553868564_5455032760963684913_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFpxregFpMHG6zEQlE-HTWq-GWrXl0Gq0H4ZateXQarQR5Vb5yyXMuFTd-s3yUyibauw5swmpqnbwiiKM1zpjDK&_nc_ohc=91xk1gbN9QoQ7kNvwFtEWF0&_nc_oc=AdlE63pnDDAm2B4NaoIGQKVsKOD2qgKt6UNZzQFe6mPh26TUg8REj7YURVcHqPCTHwc&_nc_zt=23&_nc_ht=scontent.fmnl25-4.fna&_nc_gid=_H6S9DJ9BR29oNnVOj2JBg&oh=00_AfUMDaeC5OQe5ocy2z_pG9fMhahX8_L--iVMPFb24eQQKg&oe=68AD58BF');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: var(--hover);
+            transform: translateY(-2px);
+        }
+        
+        .skill-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .skill-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--text-primary);
+        }
+        
+        .project-card:hover {
+            background: var(--hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-status {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+        
+        .project-status.completed {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+        
+        .project-status.in-progress {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+        
+        .project-status.planning {
+            background: rgba(147, 51, 234, 0.1);
+            color: #9333ea;
+            border-color: rgba(147, 51, 234, 0.2);
+        }
+        
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            background: var(--hover);
+            transform: translateY(-3px);
+        }
+        
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--hover);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .profile-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">My Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Hi, I'm <span class="highlight">Nick Mendoza</span></h1>
+                    <p class="subtitle">Computer Science Student</p>
+                    <p class="description">
+                        Passionate about advanced presentation techniques and logical reasoning. 
+                        Currently exploring computational thinking and analytical problem-solving 
+                        through CSST101 coursework and practical applications.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn-primary">
+                            <i class="fas fa-folder"></i>
+                            View My Work
+                        </a>
+                        <a href="#contact" class="btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-container">
+                        <div class="profile-pic"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>About Me</h2>
+                <p>Dedicated to mastering basic machine learning techniques</p>
+            </div>
+            
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <p>
+                        I am a Computer Science student with a deep passion for logical reasoning, 
+                        effective communication, and innovative problem-solving approaches. Through 
+                        CSST101, I'm developing critical thinking skills and learning to present 
+                        complex technical concepts with clarity and precision.
+                    </p>
+                    <p>
+                        My academic journey focuses on building a strong foundation in computational 
+                        thinking while mastering the art of professional presentation and 
+                        evidence-based reasoning that will serve me throughout my career in technology.
+                    </p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h4>Logical Reasoning</h4>
+                        <p>Propositional & predicate logic</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Critical Analysis</h4>
+                        <p>Problem evaluation & solution assessment</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Presentation Skills</h4>
+                        <p>Technical communication & visual design</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Research Methods</h4>
+                        <p>Data analysis & hypothesis testing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>CSST102 Projects</h2>
+                <p>Basic Machine Learning Techniques - AY25-26</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Logical Reasoning Fundamentals</h3>
+                        </div>
+                        <span class="project-status completed">Completed</span>
+                    </div>
+                    <p>
+                        Comprehensive exploration of propositional logic, predicate logic, and inference rules. 
+                        Analysis of logical structures and their applications in computational problem-solving.
+                    </p>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Advanced Presentation Techniques</h3>
+                        </div>
+                        <span class="project-status in-progress">In Progress</span>
+                    </div>
+                    <p>
+                        Development of professional presentation skills for technical audiences. Focus on 
+                        visual design principles, storytelling with data, and effective algorithmic communication.
+                    </p>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Critical Analysis Framework</h3>
+                        </div>
+                        <span class="project-status planning">Planning</span>
+                    </div>
+                    <p>
+                        Systematic approach to evaluating computational problems and solution methodologies. 
+                        Includes comparative analysis and evidence-based reasoning techniques.
+                    </p>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Research Methodology</h3>
+                        </div>
+                        <span class="project-status planning">Planning</span>
+                    </div>
+                    <p>
+                        Application of scientific research methods to computer science problems. Covers 
+                        hypothesis formation, experimental design, and statistical analysis of results.
+                    </p>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Argumentation and Debate</h3>
+                        </div>
+                        <span class="project-status planning">Planning</span>
+                    </div>
+                    <p>
+                        Structured argumentation techniques for defending technical decisions. Includes 
+                        formal debate preparation and counter-argument analysis in technology contexts.
+                    </p>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <h3>Final Portfolio Presentation</h3>
+                        </div>
+                        <span class="project-status planning">Planning</span>
+                    </div>
+                    <p>
+                        Comprehensive showcase of course learning objectives through integrated multimedia 
+                        presentation demonstrating mastery of technical content and presentation excellence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Connect With Me</h2>
+                <p>Let's collaborate on advanced reasoning and presentation projects</p>
+            </div>
+            
+            <div class="contact-grid fade-in">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>nicknarry.mendoza@email.com</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fab fa-github"></i>
+                    <h4>GitHub</h4>
+                    <p>github.com/nicknarrymendozabscs</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Course</h4>
+                    <p>CSST101-3A-AY25-26</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-university"></i>
+                    <h4>Program</h4>
+                    <p>BS Computer Science</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Back to top button -->
+    <a href="#hero" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script>
+        // Navigation active link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section[id]');
+        
+        function updateActiveNav() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        
+        function toggleBackToTop() {
+            if (window.scrollY > window.innerHeight * 0.5) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+        
+        // Scroll event listener
+        window.addEventListener('scroll', () => {
+            updateActiveNav();
+            toggleBackToTop();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Initialize
+        updateActiveNav();
+        toggleBackToTop();
+    </script>
+</body>
+</html>
