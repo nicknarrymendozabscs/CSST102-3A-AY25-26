@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSST102 Portfolio - Nick Narry S. Mendoza</title>
+    <title>CSST102 ML Portfolio - Nick Narry S. Mendoza</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
         * {
             margin: 0;
@@ -14,19 +14,32 @@
         }
         
         :root {
-            --primary: #1a1a1a;
-            --secondary: #2a2a2a;
-            --accent: #3a3a3a;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #808080;
-            --bg-primary: #0d0d0d;
-            --bg-secondary: #171717;
-            --bg-card: #1e1e1e;
-            --border: #2a2a2a;
-            --hover: #333333;
-            --gradient: linear-gradient(135deg, #1e1e1e, #2a2a2a);
-            --shadow: rgba(0, 0, 0, 0.3);
+            --primary: #0F172A;
+            --secondary: #1E293B;
+            --accent: #3B82F6;
+            --accent-hover: #2563EB;
+            --accent-light: #60A5FA;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --purple: #8B5CF6;
+            --pink: #EC4899;
+            --cyan: #06B6D4;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-muted: #94A3B8;
+            --bg-primary: #020617;
+            --bg-secondary: #0F172A;
+            --bg-card: rgba(30, 41, 59, 0.5);
+            --bg-glass: rgba(248, 250, 252, 0.05);
+            --border: rgba(248, 250, 252, 0.1);
+            --border-hover: rgba(248, 250, 252, 0.2);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-ml: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --shadow: rgba(0, 0, 0, 0.25);
+            --shadow-colored: rgba(59, 130, 246, 0.3);
+            --glow: 0 0 40px rgba(59, 130, 246, 0.3);
         }
         
         html {
@@ -34,11 +47,33 @@
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         /* Navigation */
@@ -48,10 +83,16 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(13, 13, 13, 0.95);
+            background: rgba(2, 6, 23, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(2, 6, 23, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .nav-container {
@@ -65,9 +106,28 @@
         
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .logo:hover::after {
+            width: 100%;
         }
         
         .nav-links {
@@ -80,13 +140,31 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
         
         .nav-links a:hover,
         .nav-links a.active {
             color: var(--text-primary);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 100%;
         }
         
         /* Container */
@@ -102,6 +180,7 @@
             display: flex;
             align-items: center;
             padding-top: 80px;
+            position: relative;
         }
         
         .hero-content {
@@ -118,26 +197,47 @@
         
         .hero-text h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
+            font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero-text .highlight {
-            color: var(--text-secondary);
-            font-weight: 400;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            position: relative;
+        }
+
+        .hero-text .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-accent);
+            opacity: 0.3;
+            border-radius: 2px;
         }
         
         .hero-text .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
+            font-size: 1.3rem;
+            color: var(--accent-light);
             margin-bottom: 2rem;
-            font-weight: 400;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .hero-text .description {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 2.5rem;
@@ -151,12 +251,12 @@
         }
         
         .btn-primary {
-            background: var(--text-primary);
-            color: var(--bg-primary);
-            padding: 0.875rem 2rem;
+            background: var(--gradient-accent);
+            color: var(--text-primary);
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 6px;
-            font-family: 'Poppins', sans-serif;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
             font-size: 0.9rem;
             text-decoration: none;
@@ -165,21 +265,39 @@
             gap: 0.5rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:hover {
-            background: var(--text-secondary);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
         }
         
         .btn-secondary {
-            background: transparent;
+            background: var(--bg-glass);
             color: var(--text-primary);
-            padding: 0.875rem 2rem;
+            padding: 1rem 2rem;
             border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
             font-size: 0.9rem;
             text-decoration: none;
             display: inline-flex;
@@ -187,11 +305,14 @@
             gap: 0.5rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            backdrop-filter: blur(10px);
         }
         
         .btn-secondary:hover {
-            background: var(--hover);
-            border-color: var(--text-secondary);
+            background: rgba(248, 250, 252, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .hero-image {
@@ -199,6 +320,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: pulse 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.2; }
         }
         
         .profile-container {
@@ -212,16 +351,37 @@
             height: 100%;
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid var(--border);
+            border: 2px solid var(--accent);
             background: var(--bg-card);
             background-image: url('https://scontent.fmnl25-4.fna.fbcdn.net/v/t39.30808-6/480624794_950708553868564_5455032760963684913_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFpxregFpMHG6zEQlE-HTWq-GWrXl0Gq0H4ZateXQarQR5Vb5yyXMuFTd-s3yUyibauw5swmpqnbwiiKM1zpjDK&_nc_ohc=91xk1gbN9QoQ7kNvwFtEWF0&_nc_oc=AdlE63pnDDAm2B4NaoIGQKVsKOD2qgKt6UNZzQFe6mPh26TUg8REj7YURVcHqPCTHwc&_nc_zt=23&_nc_ht=scontent.fmnl25-4.fna&_nc_gid=_H6S9DJ9BR29oNnVOj2JBg&oh=00_AfUMDaeC5OQe5ocy2z_pG9fMhahX8_L--iVMPFb24eQQKg&oe=68AD58BF');
             background-size: cover;
             background-position: center;
+            box-shadow: var(--glow);
+            position: relative;
+        }
+
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-accent);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-container:hover .profile-pic::after {
+            opacity: 1;
         }
         
         /* Sections */
         .section {
             padding: 6rem 0;
+            position: relative;
         }
         
         .section-header {
@@ -231,9 +391,12 @@
         
         .section-header h2 {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .section-header p {
@@ -264,25 +427,40 @@
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 1.5rem;
         }
         
         .skill-item {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 12px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-accent);
         }
         
         .skill-item:hover {
-            background: var(--hover);
-            transform: translateY(-2px);
+            background: rgba(248, 250, 252, 0.08);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
         }
         
         .skill-item h4 {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--text-primary);
         }
@@ -301,29 +479,31 @@
         }
         
         .project-card {
-            background: var(--bg-card);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 20px;
             padding: 2rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        
+
         .project-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--text-primary);
+            height: 4px;
+            background: var(--gradient-accent);
         }
         
         .project-card:hover {
-            background: var(--hover);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px var(--shadow);
+            background: rgba(248, 250, 252, 0.08);
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3);
         }
         
         .project-header {
@@ -334,8 +514,8 @@
         }
         
         .project-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
@@ -343,29 +523,34 @@
         .project-status {
             background: var(--bg-secondary);
             color: var(--text-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
             border: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .project-status.completed {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border-color: rgba(34, 197, 94, 0.2);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
         }
         
         .project-status.in-progress {
-            background: rgba(251, 191, 36, 0.1);
-            color: #fbbf24;
-            border-color: rgba(251, 191, 36, 0.2);
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
         }
         
         .project-status.planning {
-            background: rgba(147, 51, 234, 0.1);
-            color: #9333ea;
-            border-color: rgba(147, 51, 234, 0.2);
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--purple);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
         }
         
         .project-card p {
@@ -377,48 +562,77 @@
         /* Contact Section */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
         
         .contact-card {
-            background: var(--bg-card);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 2.5rem;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+        
+        .contact-card:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .contact-card:hover {
-            background: var(--hover);
-            transform: translateY(-3px);
+            background: rgba(248, 250, 252, 0.08);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
         }
         
         .contact-card i {
-            font-size: 2rem;
-            color: var(--text-primary);
+            font-size: 2.5rem;
+            color: var(--accent);
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
         
         .contact-card h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
         
         .contact-card p {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin: 0;
+            position: relative;
+            z-index: 1;
         }
         
         /* Animations */
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-30px);
+                transform: translateX(-50px);
             }
             to {
                 opacity: 1;
@@ -429,7 +643,7 @@
         @keyframes fadeInRight {
             from {
                 opacity: 0;
-                transform: translateX(30px);
+                transform: translateX(50px);
             }
             to {
                 opacity: 1;
@@ -439,8 +653,8 @@
         
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(50px);
+            transition: all 1s ease;
         }
         
         .fade-in.visible {
@@ -453,11 +667,10 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            background: var(--gradient-accent);
             color: var(--text-primary);
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -467,6 +680,7 @@
             opacity: 0;
             visibility: hidden;
             z-index: 1000;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
         
         .back-to-top.show {
@@ -475,8 +689,8 @@
         }
         
         .back-to-top:hover {
-            background: var(--hover);
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
         }
         
         /* Responsive Design */
@@ -546,7 +760,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#hero" class="logo">My Portfolio</a>
+            <a href="#hero" class="logo">ML Portfolio</a>
             <ul class="nav-links">
                 <li><a href="#hero" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -562,20 +776,20 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Hi, I'm <span class="highlight">Nick Mendoza</span></h1>
-                    <p class="subtitle">Computer Science Student</p>
+                    <p class="subtitle">Machine Learning Enthusiast</p>
                     <p class="description">
-                        Passionate about advanced presentation techniques and logical reasoning. 
-                        Currently exploring computational thinking and analytical problem-solving 
-                        through CSST101 coursework and practical applications.
+                        Passionate about artificial intelligence, data science, and machine learning algorithms. 
+                        Currently mastering fundamental ML techniques, neural networks, and data analysis 
+                        through CSST102 coursework and hands-on projects.
                     </p>
                     <div class="cta-buttons">
                         <a href="#projects" class="btn-primary">
-                            <i class="fas fa-folder"></i>
-                            View My Work
+                            <i class="fas fa-robot"></i>
+                            Explore ML Projects
                         </a>
                         <a href="#contact" class="btn-secondary">
                             <i class="fas fa-envelope"></i>
-                            Contact Me
+                            Get in Touch
                         </a>
                     </div>
                 </div>
@@ -592,41 +806,42 @@
     <section id="about" class="section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2>About Me</h2>
-                <p>Dedicated to mastering basic machine learning techniques</p>
+                <h2>About My ML Journey</h2>
+                <p>Building foundations in machine learning and artificial intelligence</p>
             </div>
             
             <div class="about-content fade-in">
                 <div class="about-text">
                     <p>
-                        I am a Computer Science student with a deep passion for logical reasoning, 
-                        effective communication, and innovative problem-solving approaches. Through 
-                        CSST101, I'm developing critical thinking skills and learning to present 
-                        complex technical concepts with clarity and precision.
+                        I am a Computer Science student with a deep fascination for machine learning, 
+                        artificial intelligence, and data science. Through CSST102, I'm developing 
+                        expertise in fundamental ML algorithms, statistical analysis, and practical 
+                        implementation of intelligent systems.
                     </p>
                     <p>
-                        My academic journey focuses on building a strong foundation in computational 
-                        thinking while mastering the art of professional presentation and 
-                        evidence-based reasoning that will serve me throughout my career in technology.
+                        My academic focus centers on understanding how machines can learn from data, 
+                        make predictions, and solve complex problems. I'm passionate about exploring 
+                        neural networks, supervised learning, and the mathematical foundations that 
+                        power modern AI applications.
                     </p>
                 </div>
                 
                 <div class="skills-grid">
                     <div class="skill-item">
-                        <h4>Logical Reasoning</h4>
-                        <p>Propositional & predicate logic</p>
+                        <h4>Machine Learning</h4>
+                        <p>Supervised & unsupervised algorithms</p>
                     </div>
                     <div class="skill-item">
-                        <h4>Critical Analysis</h4>
-                        <p>Problem evaluation & solution assessment</p>
+                        <h4>Data Analysis</h4>
+                        <p>Statistical modeling & visualization</p>
                     </div>
                     <div class="skill-item">
-                        <h4>Presentation Skills</h4>
-                        <p>Technical communication & visual design</p>
+                        <h4>Neural Networks</h4>
+                        <p>Deep learning fundamentals</p>
                     </div>
                     <div class="skill-item">
-                        <h4>Research Methods</h4>
-                        <p>Data analysis & hypothesis testing</p>
+                        <h4>Python Programming</h4>
+                        <p>ML libraries & data manipulation</p>
                     </div>
                 </div>
             </div>
@@ -637,7 +852,7 @@
     <section id="projects" class="section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2>CSST102 Projects</h2>
+                <h2>CSST102 ML Projects</h2>
                 <p>Basic Machine Learning Techniques - AY25-26</p>
             </div>
             
@@ -645,78 +860,78 @@
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div>
-                            <h3>Logical Reasoning Fundamentals</h3>
+                            <h3>Introduction to ML Fundamentals</h3>
                         </div>
                         <span class="project-status completed">Completed</span>
                     </div>
                     <p>
-                        Comprehensive exploration of propositional logic, predicate logic, and inference rules. 
-                        Analysis of logical structures and their applications in computational problem-solving.
+                        Comprehensive exploration of machine learning concepts, types of learning algorithms, 
+                        and the mathematical foundations underlying intelligent systems and data-driven predictions.
                     </p>
                 </div>
                 
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div>
-                            <h3>Advanced Presentation Techniques</h3>
+                            <h3>Supervised Learning Algorithms</h3>
                         </div>
                         <span class="project-status in-progress">In Progress</span>
                     </div>
                     <p>
-                        Development of professional presentation skills for technical audiences. Focus on 
-                        visual design principles, storytelling with data, and effective algorithmic communication.
+                        Implementation and analysis of regression and classification algorithms including 
+                        linear regression, decision trees, and k-nearest neighbors with real-world datasets.
                     </p>
                 </div>
                 
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div>
-                            <h3>Critical Analysis Framework</h3>
+                            <h3>Data Preprocessing & Feature Engineering</h3>
                         </div>
                         <span class="project-status planning">Planning</span>
                     </div>
                     <p>
-                        Systematic approach to evaluating computational problems and solution methodologies. 
-                        Includes comparative analysis and evidence-based reasoning techniques.
+                        Essential data cleaning, transformation, and feature selection techniques. 
+                        Handling missing values, outlier detection, and preparing datasets for ML algorithms.
                     </p>
                 </div>
                 
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div>
-                            <h3>Research Methodology</h3>
+                            <h3>Neural Networks Introduction</h3>
                         </div>
                         <span class="project-status planning">Planning</span>
                     </div>
                     <p>
-                        Application of scientific research methods to computer science problems. Covers 
-                        hypothesis formation, experimental design, and statistical analysis of results.
+                        Fundamentals of artificial neural networks, perceptrons, and basic deep learning 
+                        concepts. Building simple networks from scratch and understanding backpropagation.
                     </p>
                 </div>
                 
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div>
-                            <h3>Argumentation and Debate</h3>
+                            <h3>Model Evaluation & Validation</h3>
                         </div>
                         <span class="project-status planning">Planning</span>
                     </div>
                     <p>
-                        Structured argumentation techniques for defending technical decisions. Includes 
-                        formal debate preparation and counter-argument analysis in technology contexts.
+                        Cross-validation techniques, performance metrics, and avoiding overfitting. 
+                        Understanding precision, recall, F1-score, and confusion matrices for model assessment.
                     </p>
                 </div>
                 
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div>
-                            <h3>Final Portfolio Presentation</h3>
+                            <h3>ML Capstone Project</h3>
                         </div>
                         <span class="project-status planning">Planning</span>
                     </div>
                     <p>
-                        Comprehensive showcase of course learning objectives through integrated multimedia 
-                        presentation demonstrating mastery of technical content and presentation excellence.
+                        End-to-end machine learning project from data collection to deployment. 
+                        Demonstrates mastery of ML pipeline, algorithm selection, and practical problem-solving.
                     </p>
                 </div>
             </div>
@@ -728,7 +943,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Connect With Me</h2>
-                <p>Let's collaborate on advanced reasoning and presentation projects</p>
+                <p>Let's collaborate on machine learning and AI projects</p>
             </div>
             
             <div class="contact-grid fade-in">
@@ -745,9 +960,9 @@
                 </div>
                 
                 <div class="contact-card">
-                    <i class="fas fa-graduation-cap"></i>
+                    <i class="fas fa-brain"></i>
                     <h4>Course</h4>
-                    <p>CSST101-3A-AY25-26</p>
+                    <p>CSST102-3A-AY25-26</p>
                 </div>
                 
                 <div class="contact-card">
@@ -765,7 +980,8 @@
     </a>
     
     <script>
-        // Navigation active link
+        // Navigation active link and scroll effects
+        const navbar = document.querySelector('.navbar');
         const navLinks = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section[id]');
         
@@ -786,6 +1002,13 @@
                     link.classList.add('active');
                 }
             });
+
+            // Add scrolled class to navbar
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         }
         
         // Scroll animations
@@ -817,10 +1040,16 @@
             }
         }
         
-        // Scroll event listener
+        // Scroll event listener with throttling
+        let scrollTimeout;
         window.addEventListener('scroll', () => {
-            updateActiveNav();
-            toggleBackToTop();
+            if (!scrollTimeout) {
+                scrollTimeout = setTimeout(() => {
+                    updateActiveNav();
+                    toggleBackToTop();
+                    scrollTimeout = null;
+                }, 10);
+            }
         });
         
         // Smooth scrolling for navigation links
@@ -829,13 +1058,46 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
+
+        // Add subtle parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+
+        // Add typing animation to subtitle
+        const subtitle = document.querySelector('.subtitle');
+        if (subtitle) {
+            const text = subtitle.textContent;
+            subtitle.textContent = '';
+            subtitle.style.borderRight = '2px solid var(--accent)';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    subtitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    setTimeout(() => {
+                        subtitle.style.borderRight = 'none';
+                    }, 500);
+                }
+            }
+            
+            setTimeout(typeWriter, 1000);
+        }
         
         // Initialize
         updateActiveNav();
