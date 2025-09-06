@@ -1,0 +1,4 @@
+timestamp,student,AttendanceRule,AttendanceDetail,GradingRule,GradingDetail,LoginSystemRule,LoginDetail,BonusPointsRule,BonusDetail,LibraryBorrowingRule,LibraryDetail
+2025-09-06T10:30:41,Avellaneda,True,attendance=82.5% -> eligible,True,grade=78.0 -> pass,True,"user_ok=True, pass_ok=True, locked=False -> login success",True,"participated=True, base=88.0 -> bonus +5.0, final=93.0",True,"id_valid=True, overdue=False -> allowed"
+2025-09-06T10:30:41,Capili,False,attendance=70.0% -> not eligible,False,grade=72.0 -> fail,False,"user_ok=True, pass_ok=False, locked=False -> login denied",False,"participated=False, base=65.0 -> no bonus, final=65.0",False,"id_valid=True, overdue=True -> not allowed"
+2025-09-06T10:30:41,Ramos,True,attendance=95.0% -> eligible,True,grade=92.0 -> pass,False,"user_ok=True, pass_ok=True, locked=True -> login denied",True,"participated=True, base=96.0 -> bonus +5.0, final=100.0",False,"id_valid=False, overdue=False -> not allowed"
